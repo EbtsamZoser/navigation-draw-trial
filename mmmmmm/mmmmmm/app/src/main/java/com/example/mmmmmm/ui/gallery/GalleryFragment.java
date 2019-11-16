@@ -17,21 +17,21 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.mmmmmm.R;
 
 public class GalleryFragment extends Fragment {
-    ImageView imageView;
+       ImageView imageView;
     private GalleryViewModel galleryViewModel;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        }
+//    public View onCreateView(@NonNull LayoutInflater inflater,
+//                             ViewGroup container, Bundle savedInstanceState) {
+//        galleryViewModel =
+//                ViewModelProviders.of(this).get(GalleryViewModel.class);
+//        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+//        final TextView textView = root.findViewById(R.id.text_gallery);
+//        galleryViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+//        }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,12 +40,20 @@ public class GalleryFragment extends Fragment {
         // Inflate the layout for this fragment.
         final View rootView = inflater.inflate(R.layout.fragment_gallery,
                 container, false);
-            imageView = (ImageView)findViewById(R.id.one);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "Image View", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-               return root; } }
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        imageView = (ImageView) view.findViewById(R.id.one);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Image View", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+}
